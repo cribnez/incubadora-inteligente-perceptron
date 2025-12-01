@@ -23,7 +23,7 @@ El modelo demuestra conceptos clave de IA como la **inhibición sináptica** y l
 * **Tinkercad** (Simulación de sensores y actuadores)
 
 ## ⚡ Simulación de Circuito
-El hardware complementario para este proyecto (sensores DHT11/TMP36 y actuadores) puede visualizarse en el siguiente enlace:
+El hardware complementario para este proyecto (sensores DHT11) puede visualizarse en el siguiente enlace:
 
 > **[🔌 Ver Simulación en Tinkercad](https://www.tinkercad.com/things/ddX1ErLD8sU-terrific-leelo-fulffy)**
 
