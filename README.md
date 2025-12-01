@@ -2,38 +2,53 @@
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1SydQAusbD01sYYKqnw8WrF61CRHIJQVn?usp=sharing)
 
-## 📖 Descripción del Proyecto
-Este proyecto implementa una **neurona artificial (perceptrón)** diseñada para controlar el ambiente crítico de una incubadora de cultivos celulares. 
-
-El sistema resuelve un problema de lógica difusa donde las células corren riesgo solo si el ambiente es **Caliente y Seco**. La neurona aprende autónomamente a ponderar dos variables en conflicto:
-* **Temperatura ($T$):** Variable de riesgo (Peso positivo/Excitatorio).
-* **Humedad ($H$):** Variable de seguridad (Peso negativo/Inhibitorio).
-
-El modelo demuestra conceptos clave de IA como la **inhibición sináptica** y la competencia de variables (ej. el "Efecto Sauna", donde la alta humedad compensa la alta temperatura evitando una falsa alarma).
-
-## 🚀 Funcionalidades
-* **Entrenamiento del Perceptrón:** Algoritmo de aprendizaje supervisado en Python.
-* **Normalización de Datos:** Preprocesamiento con `StandardScaler` para equilibrar escalas (Grados vs Porcentaje).
-* **Visualización:** Gráficas de la frontera de decisión lineal que separa las zonas de "Seguridad" y "Peligro".
-* **Simulación de Hardware:** Integración conceptual con circuito en Tinkercad.
-
-## 🛠️ Tecnologías
-* **Python 3** (NumPy, Matplotlib, Scikit-learn)
-* **Google Colab** (Entorno de desarrollo)
-* **Tinkercad** (Simulación de sensores y actuadores)
-
-## ⚡ Simulación de Circuito
-El hardware complementario para este proyecto (sensores DHT11) puede visualizarse en el siguiente enlace:
-
-> **[🔌 Ver Simulación en Tinkercad](https://www.tinkercad.com/things/ddX1ErLD8sU-terrific-leelo-fulffy)**
-
-## 📊 Lógica de la Neurona
-La fórmula aprendida por el modelo sigue la estructura:
-$$Z = (w_t \cdot T) + (w_h \cdot H) + b$$
-
-Donde:
-- Si $Z \geq 0 \rightarrow$ **ALARMA ACTIVADA** (Peligro)
-- Si $Z < 0 \rightarrow$ **SISTEMA SEGURO** (Silencio)
+## 📖 Descripción
+Este proyecto implementa un **Perceptrón (Neurona Artificial)** para controlar el ambiente de una incubadora. El sistema aprende a activar una alarma solo en condiciones críticas (Calor + Sequedad) y demuestra fenómenos complejos como la inhibición sináptica.
 
 ---
-*Desarrollado como parte de ejercicios de Bio-Ingeniería y Fundamentos de IA.*
+
+## ⚡ Simulación de Hardware (Tinkercad)
+Aquí se muestra el diseño del circuito físico utilizado para validar los datos.
+
+<p align="center">
+  <img src="assets/circuito_tinkercad.png" alt="Circuito en Tinkercad" width="600">
+</p>
+
+> **[🔌 Interactuar con la simulación en Tinkercad](https://www.tinkercad.com/things/ddX1ErLD8sU-terrific-leelo-fulffy)**
+
+---
+
+## 📈 Análisis de Datos y Aprendizaje
+El modelo normaliza las entradas de Temperatura y Humedad para encontrar una **frontera de decisión** óptima.
+
+<p align="center">
+  <img src="assets/distribucion_datos.png" alt="Datos Normalizados" width="45%">
+  &nbsp; &nbsp;
+  <img src="assets/frontera_decision.png" alt="Frontera de Decisión" width="45%">
+</p>
+
+* **Izquierda:** Distribución inicial de los datos (Peligro en Rojo, Seguro en Verde).
+* **Derecha:** La línea roja representa lo que aprendió la neurona. Todo lo que cae arriba de la línea activa la alarma.
+
+---
+
+## 📊 Resultados de Pruebas (Matriz de Predicción)
+Se evaluó el modelo con 3 escenarios críticos para verificar la lógica de la neurona.
+
+| Escenario | Temperatura | Humedad | Predicción (Sigmoide) | Decisión | Estado |
+| :--- | :---: | :---: | :---: | :---: | :--- |
+| **1. Ambiente Seguro** | 34°C | 50% | 0.024 | `0` | ✅ Seguro |
+| **2. Peligro Crítico** | 42°C | 25% | 0.981 | `1` | 🚨 ALARMA |
+| **3. Efecto Sauna** | 40°C | 90% | 0.113 | `0` | ✅ Seguro |
+
+> **Nota sobre el "Efecto Sauna":** Observa el caso 3. Aunque la temperatura es alta (40°C), la humedad extrema (90%) inhibe la activación de la neurona, demostrando que el sistema aprendió a compensar variables.
+
+---
+
+## 🛠️ Instalación y Uso
+1. Clonar el repositorio.
+2. Instalar dependencias: `pip install -r requirements.txt`
+3. Ejecutar el notebook en `src/incubadora_neuronal.ipynb`.
+
+---
+*Desarrollado para el curso de Fundamentos de IA y Bio-Ingeniería.*
