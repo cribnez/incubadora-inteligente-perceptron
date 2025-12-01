@@ -2,8 +2,15 @@
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1SydQAusbD01sYYKqnw8WrF61CRHIJQVn?usp=sharing)
 
-## 📖 Descripción
-Este proyecto implementa un **Perceptrón (Neurona Artificial)** para controlar el ambiente de una incubadora. El sistema aprende a activar una alarma solo en condiciones críticas (Calor + Sequedad) y demuestra fenómenos complejos como la inhibición sináptica.
+## 📖 Descripción Técnica y Flujo de Datos
+Este proyecto implementa un **Perceptrón (Neurona Artificial)** entrenado en Python y desplegado en un microcontrolador (Arduino) para controlar una incubadora.
+
+**Puntos clave de la implementación:**
+* **Entrenamiento (Python):** Se obtuvieron los pesos sinápticos ($w_1=0.0343, w_2=-0.0816$) y el sesgo ($b=0.0$) optimizando la detección de ambientes "Calientes y Secos".
+* **Adaptación de Hardware (`map`):** En Arduino, las señales analógicas (0-1023) se transforman a magnitudes físicas (25-45°C y 20-90%) usando la función `map()`.
+* **Preprocesamiento Embebido (`StandardScaler`):** Se replicó manualmente la normalización Z-score en C++ ($z = \frac{x - \mu}{\sigma}$), utilizando las medias y desviaciones estándar calculadas previamente en el entrenamiento.
+
+> El sistema demuestra un flujo completo de **Edge AI**: Entrenar en la nube (Colab) $\rightarrow$ Ejecutar en el borde (Arduino).
 
 ---
 
