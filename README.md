@@ -10,11 +10,13 @@ Este proyecto implementa un **Perceptrón (Neurona Artificial)** para controlar 
 ## ⚡ Simulación de Hardware (Tinkercad)
 Aquí se muestra el diseño del circuito físico utilizado para validar los datos.
 
+> **Nota de Implementación:** Debido a que Tinkercad no cuenta con el sensor **DHT22** nativo, se utilizan **potenciómetros** para simular las entradas de Temperatura y Humedad. Esto permite manipular manualmente los valores para testear la respuesta de la neurona ante cualquier escenario.
+
 <p align="center">
   <img src="assets/circuito_tinkercad.png" alt="Circuito en Tinkercad" width="600">
+  <br><br>
+  <a href="https://www.tinkercad.com/things/ddX1ErLD8sU-terrific-leelo-fulffy"><strong>🔌 Interactuar con la simulación en Tinkercad</strong></a>
 </p>
-
-> **[🔌 Interactuar con la simulación en Tinkercad](https://www.tinkercad.com/things/ddX1ErLD8sU-terrific-leelo-fulffy)**
 
 ---
 
