@@ -81,6 +81,7 @@ int stepFunction(float z) {
   if (z >= 0) return 1; // 🚨 PELIGRO (Alarma Encendida)
   else return 0;        // ✅ SEGURO (Alarma Apagada)
 }
+```
 ---
 
 ## 🛠️ Instalación y Uso
