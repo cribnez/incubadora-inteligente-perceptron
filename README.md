@@ -47,6 +47,17 @@ Se evaluó el modelo con 3 escenarios críticos para verificar la lógica de la 
 
 ---
 
+## 🤖 Implementación en Microcontrolador
+El archivo `src/incubadora_arduino.ino` contiene la implementación de la neurona en C++ para Arduino.
+
+**Flujo de despliegue:**
+1.  Se entrenó el modelo en Python (Google Colab).
+2.  Se obtuvieron los pesos sinápticos (`w1`, `w2`) y el sesgo (`b`).
+3.  Se obtuvieron la media y desviación estándar para la normalización (`StandardScaler`).
+4.  **Estos valores se "quemaron" (hardcoded) en el Arduino** para que pueda tomar decisiones autónomas sin necesitar una computadora conectada.
+
+---
+
 ## 🛠️ Instalación y Uso
 1. Clonar el repositorio.
 2. Instalar dependencias: `pip install -r requirements.txt`
