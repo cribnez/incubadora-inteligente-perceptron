@@ -12,6 +12,39 @@ Este proyecto implementa un **Perceptrón (Neurona Artificial)** entrenado en Py
 
 ---
 
+## 🤖 Implementación en Microcontrolador
+
+El archivo `src/incubadora_arduino.ino` contiene el despliegue del modelo ("Edge AI"). El Arduino opera de forma autónoma calculando la salida de la neurona en tiempo real.
+
+### 🔄 Flujo de Despliegue
+1.  **Entrenamiento:** Se optimizaron los pesos en Python (Google Colab).
+2.  **Extracción:** Se obtuvieron los parámetros ($w, b, \mu, \sigma$).
+3.  **Incrustación:** Los valores se "quemaron" (hardcoded) en el código C++.
+
+### 🧮 Ecuación de la Neurona
+El microcontrolador ejecuta la siguiente operación matemática en cada ciclo del `loop()`:
+
+$$Z = (w_1 \cdot x_1) + (w_2 \cdot x_2) + b$$
+
+Sustituyendo con los valores entrenados que están en el código:
+
+$$Z = (0.0343 \cdot \text{Temp}_{norm}) + (-0.0816 \cdot \text{Hum}_{norm}) + 0.0$$
+
+Donde las entradas normalizadas ($x$) se calculan previamente en el Arduino usando la media y desviación estándar obtenidas del `StandardScaler`.
+
+### 🚦 Regla de Decisión (Función Escalón)
+Finalmente, el sistema aplica la función de activación para decidir el estado de la alarma:
+
+```cpp
+// Lógica en C++
+int stepFunction(float z) {
+  if (z >= 0) return 1; // 🚨 PELIGRO (Alarma Encendida)
+  else return 0;        // ✅ SEGURO (Alarma Apagada)
+}
+```
+
+---
+
 ## ⚡ Simulación de Hardware (Tinkercad)
 Aquí se muestra el diseño del circuito físico utilizado para validar los datos.
 
@@ -50,38 +83,6 @@ Se evaluó el modelo con 3 escenarios críticos para verificar la lógica de la 
 
 > **Nota sobre el "Efecto Sauna":** Observa el caso 3. Aunque la temperatura es alta (40°C), la humedad extrema (90%) inhibe la activación de la neurona, demostrando que el sistema aprendió a compensar variables.
 
----
-
-## 🤖 Implementación en Microcontrolador
-
-El archivo `src/incubadora_arduino.ino` contiene el despliegue del modelo ("Edge AI"). El Arduino opera de forma autónoma calculando la salida de la neurona en tiempo real.
-
-### 🔄 Flujo de Despliegue
-1.  **Entrenamiento:** Se optimizaron los pesos en Python (Google Colab).
-2.  **Extracción:** Se obtuvieron los parámetros ($w, b, \mu, \sigma$).
-3.  **Incrustación:** Los valores se "quemaron" (hardcoded) en el código C++.
-
-### 🧮 Ecuación de la Neurona
-El microcontrolador ejecuta la siguiente operación matemática en cada ciclo del `loop()`:
-
-$$Z = (w_1 \cdot x_1) + (w_2 \cdot x_2) + b$$
-
-Sustituyendo con los valores entrenados que están en el código:
-
-$$Z = (0.0343 \cdot \text{Temp}_{norm}) + (-0.0816 \cdot \text{Hum}_{norm}) + 0.0$$
-
-Donde las entradas normalizadas ($x$) se calculan previamente en el Arduino usando la media y desviación estándar obtenidas del `StandardScaler`.
-
-### 🚦 Regla de Decisión (Función Escalón)
-Finalmente, el sistema aplica la función de activación para decidir el estado de la alarma:
-
-```cpp
-// Lógica en C++
-int stepFunction(float z) {
-  if (z >= 0) return 1; // 🚨 PELIGRO (Alarma Encendida)
-  else return 0;        // ✅ SEGURO (Alarma Apagada)
-}
-```
 ---
 
 ## 🛠️ Instalación y Uso
