@@ -10,8 +10,6 @@ Este proyecto implementa un **Perceptrón (Neurona Artificial)** entrenado en Py
 * **Adaptación de Hardware (`map`):** En Arduino, las señales analógicas (0-1023) se transforman a magnitudes físicas (25-45°C y 20-90%) usando la función `map()`.
 * **Preprocesamiento Embebido (`StandardScaler`):** Se replicó manualmente la normalización Z-score en C++ ($z = \frac{x - \mu}{\sigma}$), utilizando las medias y desviaciones estándar calculadas previamente en el entrenamiento.
 
-> El sistema demuestra un flujo completo de **Edge AI**: Entrenar en la nube (Colab) $\rightarrow$ Ejecutar en el borde (Arduino).
-
 ---
 
 ## ⚡ Simulación de Hardware (Tinkercad)
